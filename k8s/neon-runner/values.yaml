@@ -1,0 +1,41 @@
+namespace: neon-runner
+
+backend:
+  replicaCount: 2
+  image:
+    repository: shivesh8/neon-runner-backend
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    port: 8000
+    targetPort: 8000
+    type: ClusterIP
+  probes:
+    readiness:
+      path: /ready
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    liveness:
+      path: /ready
+      initialDelaySeconds: 15
+      periodSeconds: 20
+
+frontend:
+  replicaCount: 2
+  image:
+    repository: shivesh8/neon-runner-frontend
+    tag: latest
+    pullPolicy: Always
+  service:
+    port: 8080
+    targetPort: 8080
+    type: NodePort
+  probes:
+    readiness:
+      path: /
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    liveness:
+      path: /
+      initialDelaySeconds: 15
+      periodSeconds: 20
