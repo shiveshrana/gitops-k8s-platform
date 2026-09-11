@@ -21,7 +21,7 @@ backend:
       periodSeconds: 20
 
 frontend:
-  replicaCount: 2
+  replicaCount: 3
   image:
     repository: shivesh8/neon-runner-frontend
     tag: latest
